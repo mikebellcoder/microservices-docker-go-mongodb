@@ -6,7 +6,6 @@ on:
       - 'v*'
 
 env:
-  REGISTRY: ghcr.io
   MOVIES_IMAGE_NAME: 'cinema-movies'
 
 jobs:

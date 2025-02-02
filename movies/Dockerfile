@@ -11,8 +11,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o 
 
 # build a small image
 FROM alpine:3.17.3
-LABEL language "golang"
-LABEL org.opencontainers.image.source https://github.com/mikebellcoder/microservices-docker-go-mongodb
+LABEL language="golang"
+LABEL org.opencontainers.image.source="https://github.com/mikebellcoder/microservices-docker-go-mongodb"
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder --chown=elf:1000 /go/bin/cinema-movies /cinema
 USER elf
