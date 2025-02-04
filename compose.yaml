@@ -1,0 +1,72 @@
+services:
+  proxy:
+    image: traefik:v2.4.2
+    command:
+      # - "--log.level=DEBUG"
+      - "--api=true"
+      - "--api.dashboard=true"
+      - "--api.insecure=true" # Don't do that in production
+      - "--providers.docker"
+      - "--entrypoints.web.address=:80"
+    labels: {}
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host
+
+  db:
+    image: mongo:4.2.23
+    # ports:
+    #   - target: 27017
+    #     published: 27017
+    #     protocol: tcp
+    #     mode: host
+    volumes:
+      - type: bind
+        source: ./backup
+        target: $PWD/backup
+
+  bookings:
+    build: ./bookings
+    # image: ghcr.io/mikebellcoder/cinema-bookings: <-- need version number
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+    # environment:
+      # MONGODB_USERNAME: "demo"
+      # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
+    labels: {}
+
+  movies:
+    build: ./movies
+    # image: ghcr.io/mikebellcoder/cinema-movies: <-- need version number
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+    # environment:
+      # MONGODB_USERNAME: "demo"
+      # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
+    labels: {}
+    ports:
+      - 4000:4000
+
+  showtimes:
+    build: ./showtimes
+    # image: ghcr.io/mikebellcoder/cinema-showtimes: <-- need version number
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+    # environment:
+      # MONGODB_USERNAME: "demo"
+      # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
+    labels: {}
