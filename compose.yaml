@@ -70,3 +70,17 @@ services:
       # MONGODB_USERNAME: "demo"
       # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
     labels: {}
+
+  users:
+    build: ./users
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+    labels: {}
+
+  website:
+    build: ./users
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+    labels: {}

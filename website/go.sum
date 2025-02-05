@@ -1,0 +1,12 @@
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/gorilla/mux v1.8.1 h1:TuBL49tXwgrFYWhqrNgrUNEY92u81SPhu7sTdzQEiWY=
+github.com/gorilla/mux v1.8.1/go.mod h1:AKf9I4AEqPTmMytcMc0KkNouC66V3BtZ4qD5fmWSiMQ=
+github.com/mikebellcoder/microservices-docker-go-mongodb/bookings v0.0.0-20250204013546-36657b58ec35 h1:z7B/q8QGOVUyAIIkZgPAR+xigssT9Ux6XpvQe6HctIs=
+github.com/mikebellcoder/microservices-docker-go-mongodb/bookings v0.0.0-20250204013546-36657b58ec35/go.mod h1:PBKKCTAseonZFWGDEg9csGs7qdGofJGVInBZ2Y7hUXQ=
+github.com/mikebellcoder/microservices-docker-go-mongodb/movies v0.0.0-20250204013546-36657b58ec35 h1:5UnBqGKG4gc73mA75f4zMn0GwccCpZc6qMZZXOyfAqw=
+github.com/mikebellcoder/microservices-docker-go-mongodb/movies v0.0.0-20250204013546-36657b58ec35/go.mod h1:k7ScbGoZSlQpoy5rRRLRBuvHKCQzXtx0PDQd3RNOhqU=
+github.com/mikebellcoder/microservices-docker-go-mongodb/showtimes v0.0.0-20250204013546-36657b58ec35 h1:dfqsefKnrGxGIWPifOJl63SFtA9KxBqfhbnQjlTRh4c=
+github.com/mikebellcoder/microservices-docker-go-mongodb/showtimes v0.0.0-20250204013546-36657b58ec35/go.mod h1:3pKFZf3AX0OPZag1ycrv5erNoZGqy9HGPj7plTccPGs=
+go.mongodb.org/mongo-driver v1.17.2 h1:gvZyk8352qSfzyZ2UMWcpDpMSGEr1eqE4T793SqyhzM=
+go.mongodb.org/mongo-driver v1.17.2/go.mod h1:Hy04i7O2kC4RS06ZrhPRqj/u4DTYkFDAAccj+rVKqgQ=
