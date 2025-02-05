@@ -10,5 +10,6 @@ require (
 require (
 	github.com/mikebellcoder/microservices-docker-go-mongodb/movies v0.0.0-20250204013546-36657b58ec35
 	github.com/mikebellcoder/microservices-docker-go-mongodb/showtimes v0.0.0-20250204013546-36657b58ec35
+	github.com/mikebellcoder/microservices-docker-go-mongodb/users v0.0.0-20250205214312-b093d8b4a602
 	go.mongodb.org/mongo-driver v1.17.2 // indirect
 )

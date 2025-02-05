@@ -8,5 +8,7 @@ github.com/mikebellcoder/microservices-docker-go-mongodb/movies v0.0.0-202502040
 github.com/mikebellcoder/microservices-docker-go-mongodb/movies v0.0.0-20250204013546-36657b58ec35/go.mod h1:k7ScbGoZSlQpoy5rRRLRBuvHKCQzXtx0PDQd3RNOhqU=
 github.com/mikebellcoder/microservices-docker-go-mongodb/showtimes v0.0.0-20250204013546-36657b58ec35 h1:dfqsefKnrGxGIWPifOJl63SFtA9KxBqfhbnQjlTRh4c=
 github.com/mikebellcoder/microservices-docker-go-mongodb/showtimes v0.0.0-20250204013546-36657b58ec35/go.mod h1:3pKFZf3AX0OPZag1ycrv5erNoZGqy9HGPj7plTccPGs=
+github.com/mikebellcoder/microservices-docker-go-mongodb/users v0.0.0-20250205214312-b093d8b4a602 h1:e2kvPHHtrck8E4w4c+I0eds98Eztb+r1uwyMxfN6BHc=
+github.com/mikebellcoder/microservices-docker-go-mongodb/users v0.0.0-20250205214312-b093d8b4a602/go.mod h1:plN1FaWJBTLUqMGyd+bevWHo162vLYX4KPuQaK1g6zw=
 go.mongodb.org/mongo-driver v1.17.2 h1:gvZyk8352qSfzyZ2UMWcpDpMSGEr1eqE4T793SqyhzM=
 go.mongodb.org/mongo-driver v1.17.2/go.mod h1:Hy04i7O2kC4RS06ZrhPRqj/u4DTYkFDAAccj+rVKqgQ=
