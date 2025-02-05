@@ -2,15 +2,19 @@ name: release
 
 on:
   push:
-    tags: 
-      - 'v*'
+    tags:
+      - "v*"
 
 env:
-  MOVIES_IMAGE_NAME: 'cinema-movies'
+  BOOKINGS_IMAGE_NAME: "cinema-bookings"
+  MOVIES_IMAGE_NAME: "cinema-movies"
+  SHOWTIMES_IMAGE_NAME: "cinema-showtimes"
+  USERS_IMAGE_NAME: "cinema-users"
+  WEBSITE_IMAGE_NAME: "cinema-website"
 
 jobs:
   multi-registries:
-    name: 'Build'
+    name: "Build"
     runs-on: ubuntu-latest
     steps:
       # setups
@@ -20,7 +24,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Login to DockerHub
         uses: docker/login-action@v2
-        with: 
+        with:
           username: ${{ secrets.DOCKERHUB_USERNAME_2 }}
           password: ${{ secrets.DOCKERHUB_TOKEN_2 }}
       - name: Login to GitHub Container Registry
@@ -32,8 +36,20 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
-        
-      # build and push each microservice release 
+
+      # bookings microservice
+      - name: Build and push bookings microservice
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./bookings
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          file: ./bookings/Dockerfile
+          tags: |
+            mikebellcoder/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mikebellcoder/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+
+      # movies microservice
       - name: Build and push movies microservice
         uses: docker/build-push-action@v3
         with:
@@ -44,3 +60,39 @@ jobs:
           tags: |
             mikebellcoder/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mikebellcoder/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+
+      # showtimes microservice
+      - name: Build and push showtimes microservice
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./showtimes/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          file: ./showtimes/Dockerfile
+          tags: |
+            mikebellcoder/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mikebellcoder/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+
+      # users microservice
+      - name: Build and push users microservice
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./users/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          file: ./users/Dockerfile
+          tags: |
+            mikebellcoder/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }} 
+            ghcr.io/mikebellcoder/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+
+      # website microservice
+      - name: Build and push website microservice
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./website/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          file: ./website/Dockerfile
+          tags: |
+            mikebellcoder/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mikebellcoder/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
