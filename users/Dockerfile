@@ -1,5 +1,5 @@
 # base image
-FROM golang:1.22.5 AS builder
+FROM golang:1.22.5-alpine AS builder
 RUN adduser -D -g '' elf
 WORKDIR /opt/app/
 COPY go.mod go.sum ./
