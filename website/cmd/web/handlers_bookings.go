@@ -128,7 +128,7 @@ func (app *application) bookingsView(w http.ResponseWriter, r *http.Request) {
 	// get booking list from API
 	var td bookingTemplateData
 	app.infoLog.Println("Calling bookings API...")
-	url := fmt.Sprintf("%s/%s", app.apis.bookings, &bookingID)
+	url := fmt.Sprintf("%s/%s", app.apis.bookings, bookingID)
 
 	err := app.getAPIContent(url, &td.Booking)
 	if err != nil {
