@@ -34,7 +34,7 @@ services:
     volumes:
       - type: bind
         source: ./backup
-        target: $PWD/backup
+        target: /backup
 
   bookings:
     build: ./bookings
@@ -42,10 +42,13 @@ services:
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
-    # environment:
+      # environment:
       # MONGODB_USERNAME: "demo"
       # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
     labels: {}
+      # Enable public access
+      # - "traefik.http.routers.bookings.rule=PathPrefix(`/api/bookings/`)"
+      # - "traefik.http.services.bookings.loadbalancer.server.port=4000"
 
   movies:
     build: ./movies
@@ -53,12 +56,15 @@ services:
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
-    # environment:
+      # environment:
       # MONGODB_USERNAME: "demo"
       # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
-    labels: {}
-    ports:
-      - 4000:4000
+    labels:
+      # Enable public access
+      - "traefik.http.routers.movies.rule=PathPrefix(`/api/movies/`)"
+      - "traefik.http.services.movies.loadbalancer.server.port=4000"
+      # Apply middlewares
+      - "traefik.http.routers.movies.middlewares=my-header,my-compress"
 
   showtimes:
     build: ./showtimes
@@ -66,10 +72,13 @@ services:
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
-    # environment:
+      # environment:
       # MONGODB_USERNAME: "demo"
       # MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
     labels: {}
+      # Enable public access
+      # - "traefik.http.routers.showtimes.rule=PathPrefix(`/api/showtimes/`)"
+      # - "traefik.http.services.showtimes.loadbalancer.server.port=4000"
 
   users:
     build: ./users
@@ -77,10 +86,22 @@ services:
       - "-mongoURI"
       - "mongodb://db:27017/"
     labels: {}
+      # Enable public access
+      # - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
+      # - "traefik.http.services.users.loadbalancer.server.port=4000"
 
   website:
-    build: ./users
+    build: ./website
     command:
-      - "-mongoURI"
-      - "mongodb://db:27017/"
-    labels: {}
+      - "-usersAPI"
+      - "http://users:4000/api/users/"
+      - "-moviesAPI"
+      - "http://movies:4000/api/movies/"
+      - "-showtimesAPI"
+      - "http://showtimes:4000/api/showtimes/"
+      - "-bookingsAPI"
+      - "http://bookings:4000/api/bookings/"
+    labels:
+      # Enable public access
+      - "traefik.http.routers.website.rule=PathPrefix(`/`)"
+      - "traefik.http.services.website.loadbalancer.server.port=8000"

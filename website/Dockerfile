@@ -11,7 +11,6 @@ FROM alpine:3.17.3
 LABEL language="golang"
 LABEL org.containers.image.source="https://github.com/mikebellcoder/microservices-docker-go-mongodb"
 COPY --from=builder /etc/passwd /etc/passwd
-WORKDIR /opt/web
 COPY --from=builder --chown=elf:1000 /go/bin/cinema-website /cinema-website
 COPY ./ui ui
 USER elf
